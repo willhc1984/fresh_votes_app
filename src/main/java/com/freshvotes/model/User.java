@@ -1,4 +1,4 @@
-package com.fresh_votes.model;
+package com.freshvotes.model;
 
 import javax.annotation.Generated;
 import javax.persistence.Entity;

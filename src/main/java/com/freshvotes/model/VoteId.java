@@ -1,4 +1,4 @@
-package com.fresh_votes.model;
+package com.freshvotes.model;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class CommentId implements Serializable{
+public class VoteId implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	

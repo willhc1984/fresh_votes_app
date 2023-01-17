@@ -1,4 +1,4 @@
-package com.fresh_votes.model;
+package com.freshvotes.model;
 
 import java.io.Serializable;
 

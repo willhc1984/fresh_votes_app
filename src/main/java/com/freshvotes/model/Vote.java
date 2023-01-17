@@ -1,4 +1,4 @@
-package com.fresh_votes.model;
+package com.freshvotes.model;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
