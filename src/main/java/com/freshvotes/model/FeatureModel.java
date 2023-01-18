@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_features")
-public class Feature {
+public class FeatureModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
