@@ -23,9 +23,9 @@ public class FreshVotesAppApplication  implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		UserModel u1 = new UserModel();
-		u1.setName("william"); u1.setUsername("will"); u1.setPassword("$2a$12$hDaMvsXu1ygO2dhPfmmKy.3kVNThA0rfCxvbQk9AEEUfwgYv4PHFW");
-		repository.save(u1);
+//		UserModel u1 = new UserModel();
+//		u1.setName("maria"); u1.setUsername("maria"); u1.setPassword("$2a$12$CtVEGjY3UJUJB91S5OrJjOxFIOQ9h1TGxrMAMWkBJOVMDQ11fq6RK");
+//		repository.save(u1);
 	}
 
 }

@@ -24,14 +24,15 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		//auth
-//			.userDetailsService(userDetailService)
-//			.passwordEncoder(getPasswordEncoder());
-		auth.inMemoryAuthentication()
-			.passwordEncoder(getPasswordEncoder())
-			.withUser("jose@hotmail.com")
-			.password(getPasswordEncoder().encode("123456"))
-			.roles("USER");
+		auth
+			.userDetailsService(userDetailService)
+			.passwordEncoder(getPasswordEncoder());
+		
+//		auth.inMemoryAuthentication()
+//			.passwordEncoder(getPasswordEncoder())
+//			.withUser("jose@hotmail.com")
+//			.password(getPasswordEncoder().encode("123456"))
+//			.roles("USER");
 	}
 	
 	@Override
@@ -41,6 +42,7 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 	        .authorizeRequests()
 	        	.antMatchers("/h2-console/**").permitAll()
 	        	.antMatchers("/").permitAll()
+	        	.antMatchers("/register/**").permitAll()
 	        	.anyRequest().hasRole("USER").and()
 	        .formLogin()
 	        	.loginPage("/login")
