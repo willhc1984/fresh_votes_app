@@ -16,7 +16,7 @@ import com.freshvotes.security.Authority;
 
 @Entity
 @Table(name = "tb_users")
-public class UserModel {
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class UserModel {
 	private String username;
 	private String password;
 	private String name;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userModel")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
 	Set<Authority> authorities = new HashSet<>();
 	
 	public Long getId() {
@@ -57,5 +57,11 @@ public class UserModel {
 	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name
+				+ ", authorities=" + authorities + "]";
+	}
+	
 }

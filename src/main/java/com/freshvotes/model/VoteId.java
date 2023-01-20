@@ -6,25 +6,25 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class CommentModelId implements Serializable{
+public class VoteId implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
-	private UserModel user;
+	private User user;
 	@ManyToOne
-	private FeatureModel feature;
+	private Feature feature;
 	
-	public UserModel getUser() {
+	public User getUser() {
 		return user;
 	}
-	public void setUser(UserModel user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
-	public FeatureModel getFeature() {
+	public Feature getFeature() {
 		return feature;
 	}
-	public void setFeature(FeatureModel feature) {
+	public void setFeature(Feature feature) {
 		this.feature = feature;
 	}
 	

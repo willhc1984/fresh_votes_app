@@ -6,10 +6,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_votes")
-public class VoteModel {
+public class Vote {
 	
 	@EmbeddedId
-	private VoteModelId pk;
+	private VoteId pk;
 	private Boolean upvote;
 	
 	public Boolean getUpvote() {

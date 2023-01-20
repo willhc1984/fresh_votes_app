@@ -1,14 +1,20 @@
 package com.freshvotes.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.freshvotes.model.UserModel;
+import com.freshvotes.model.User;
+import com.freshvotes.service.UserService;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping(value = "/login")
 	public String login() {
@@ -16,14 +22,16 @@ public class LoginController {
 	}
 	
 	@GetMapping(value = "/register")
-	public String register() {
+	public String register(ModelMap model) {
+		model.put("user",  new User());
 		return "register";
 	}
 	
 	@PostMapping(value = "/register")
-	public String registerPost(@ModelAttribute UserModel userModel) {
-		System.out.println(userModel.toString());
-		return "redirect/login";
+	public String registerPost(@ModelAttribute User user) {
+		System.out.println(user.toString());
+		userService.save(user);
+		return "redirect:login";
 	}
 
 }

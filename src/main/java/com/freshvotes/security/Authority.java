@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import com.freshvotes.model.UserModel;
+import com.freshvotes.model.User;
 
 @Entity
 @Table(name = "tb_authorities")
@@ -22,7 +22,7 @@ public class Authority implements GrantedAuthority{
 	private Long id;
 	private String authority;
 	@ManyToOne
-	private UserModel userModel;
+	private User user;
 
 	public Long getId() {
 		return id;
@@ -32,12 +32,12 @@ public class Authority implements GrantedAuthority{
 		this.id = id;
 	}
 
-	public UserModel getUserModel() {
-		return userModel;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserModel(UserModel userModel) {
-		this.userModel = userModel;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

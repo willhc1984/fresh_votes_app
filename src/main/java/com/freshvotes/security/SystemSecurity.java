@@ -40,7 +40,7 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 		http.headers().frameOptions().disable();
 		http
 	        .authorizeRequests()
-	        	.antMatchers("/h2-console/**").permitAll()
+	        	.antMatchers("/**/*.*").permitAll()
 	        	.antMatchers("/").permitAll()
 	        	.antMatchers("/register/**").permitAll()
 	        	.anyRequest().hasRole("USER").and()

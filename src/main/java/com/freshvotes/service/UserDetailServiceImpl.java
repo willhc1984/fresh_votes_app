@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.freshvotes.model.UserModel;
+import com.freshvotes.model.User;
 import com.freshvotes.repository.UserRepository;
 import com.freshvotes.security.CustomSecurityUser;
 
@@ -18,11 +18,11 @@ public class UserDetailServiceImpl implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserModel userModel = userRepository.findByUsername(username);
-		if(userModel == null) {
-			throw new UsernameNotFoundException("Ivalid Username and password!");
+		User user = userRepository.findByUsername(username);
+		if(user == null) {
+			throw new UsernameNotFoundException("Ivalid username and password!");
 		}
-		return new CustomSecurityUser(userModel);
+		return new CustomSecurityUser(user);
 	}
 
 }

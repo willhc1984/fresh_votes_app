@@ -4,9 +4,9 @@ import java.util.Set;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.freshvotes.model.UserModel;
+import com.freshvotes.model.User;
 
-public class CustomSecurityUser extends UserModel implements UserDetails{
+public class CustomSecurityUser extends User implements UserDetails{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -14,7 +14,7 @@ public class CustomSecurityUser extends UserModel implements UserDetails{
 		
 	}
 
-	public CustomSecurityUser(UserModel userModel) {
+	public CustomSecurityUser(User userModel) {
 		this.setAuthorities(userModel.getAuthorities());
 		this.setId(userModel.getId());
 		this.setName(userModel.getUsername());

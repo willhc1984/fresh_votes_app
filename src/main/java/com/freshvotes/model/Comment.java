@@ -9,17 +9,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_comments")
-public class CommentModel{
+public class Comment{
 	
 	@EmbeddedId
-	private CommentModelId pk;
+	private CommentId pk;
 	@Column(length = 5000)
 	private String Text;
 	
-	public CommentModelId getPk() {
+	public CommentId getPk() {
 		return pk;
 	}
-	public void setPk(CommentModelId pk) {
+	public void setPk(CommentId pk) {
 		this.pk = pk;
 	}
 	public String getText() {
