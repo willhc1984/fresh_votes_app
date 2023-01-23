@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -36,16 +37,18 @@ public class ProductController {
 			Product product = optionalProduct.get();
 			model.put("product", product);
 		}else {
-			response.sendError(HttpStatus.NOT_FOUND.value(), "Product with id " + id + " was not found");
+			response.sendError(HttpStatus.NOT_FOUND.value(), "Product with id " + id + " not found!");
 			return "product";
 		}
 		return "product";
 	}
 	
-//	@PostMapping(value = "/products")
-//	public String saveProduct(@PathVariable Long id, Product product) {		
-//		return "redirect:/products/"+product.getId();
-//	}
+	@PostMapping(value = "/products/{id}")
+	public String saveProduct(@PathVariable Long id, Product product) {	
+		productRepository.save(product);
+		return "redirect:/products/" + product.getId();
+
+	}
 	
 	@PostMapping(value = "/products")
 	private String createProduct(@AuthenticationPrincipal User user) {
