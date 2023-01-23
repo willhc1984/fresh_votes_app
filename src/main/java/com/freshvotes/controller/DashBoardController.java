@@ -1,12 +1,22 @@
 package com.freshvotes.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.freshvotes.model.Product;
+import com.freshvotes.model.User;
+import com.freshvotes.repository.ProductRepository;
 
 @Controller
 public class DashBoardController {
+	
+	@Autowired
+	private ProductRepository productRepository;
 	
 	@GetMapping(value = "/")
 	public String rootView() {
@@ -14,8 +24,10 @@ public class DashBoardController {
 	}	
 	
 	@GetMapping(value = "/dashboard")
-	public String dashboard() {
+	private String dashboard(@AuthenticationPrincipal User user, ModelMap model) {
+		List<Product> products = productRepository.findByUser(user);
+		model.put("products", products);
 		return "dashboard";
-	}	
+	}
 
 }

@@ -13,6 +13,21 @@
   <body>
     <h1>FreshVotes Dashboard</h1>
     
+    <div th:if="${products != null}">
+    	<div class="row">
+    		<div class="col">
+    			<h1>Products</h1>
+    		</div>
+    	</div>   
+    	
+    	<div class="row" th:each="product : ${products}">
+    		<div class="col">
+    			<div th:text="${product.user.name}"></div>
+    			<a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}"></a>
+    		</div>    		
+    	</div> 
+    </div>
+    
     <form action="/logout" method="POST">
       	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     	<button type="submit">Logout</input>

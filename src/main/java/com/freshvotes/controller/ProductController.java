@@ -1,12 +1,12 @@
 package com.freshvotes.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -24,11 +24,6 @@ public class ProductController {
 	
 	@Autowired
 	private ProductRepository productRepository;
-	
-	@GetMapping(value = "/products")
-	private String getProduct() {
-		return "product";
-	}
 	
 	@GetMapping(value = "/products/{id}")
 	public String getProduct(@PathVariable Long id, ModelMap model, HttpServletResponse response) throws IOException{
