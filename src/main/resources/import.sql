@@ -17,3 +17,8 @@ insert into tb_products(name, published, user_id) values("Product #6", 0, 2);
 insert into tb_products(name, published, user_id) values("Product #7", 0, 3);
 insert into tb_products(name, published, user_id) values("Product #8", 0, 3);
 insert into tb_products(name, published, user_id) values("Product #9", 0, 3);
+
+insert into tb_features(description, status, title, product_id) values ('Make database better', 'Pending review', 'Data base improving', 1);
+insert into tb_features(description, status, title, product_id) values ('Make database better', 'Pending review', 'Data base improving', 2);
+insert into tb_features(description, status, title, product_id) values ('Make database better', 'Pending review', 'Data base improving', 3);
+insert into tb_features(description, status, title, product_id) values ('Make database better', 'Pending review', 'Data base improving', 1);

@@ -30,7 +30,14 @@ public class FeatureService {
 		}
 
 		return feature;
-		
+	}
+
+	public Feature save(Feature feature) {
+		return featureRepository.save(feature);
+	}
+
+	public Optional<Feature> findById(Long featureId) {
+		return featureRepository.findById(featureId);
 	}
 
 }

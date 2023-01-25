@@ -1,7 +1,10 @@
 package com.freshvotes.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +27,19 @@ public class FeatureController {
 	}
 	
 	@GetMapping(value = "/{featureId}")
-	public String getFeature(@PathVariable Long featureId, @PathVariable Long productId) {
-		return "feature";
+	public String getFeature(ModelMap model, @PathVariable Long featureId, @PathVariable Long productId) {
+		Optional<Feature> optionalFeature = featureService.findById(featureId);
+		if(optionalFeature.isPresent()){
+			model.put("feature", optionalFeature.get());
+		}
 		
+		return "feature";
+	}
+	
+	@PostMapping(value = "/{featureId}")
+	public String updateFeature(Feature feature, @PathVariable Long productId, @PathVariable Long featureId) {
+		feature = featureService.save(feature);
+		return "redirect:/products/"+productId+"/features/"+feature.getId();
 	}
 	
 	
