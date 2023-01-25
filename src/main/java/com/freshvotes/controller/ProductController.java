@@ -1,11 +1,15 @@
 package com.freshvotes.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,30 +23,32 @@ import com.freshvotes.model.Product;
 import com.freshvotes.model.User;
 import com.freshvotes.repository.ProductRepository;
 
+
 @Controller
 public class ProductController {
+	
+	private Logger log = LoggerFactory.getLogger(ProductController.class);
 	
 	@Autowired
 	private ProductRepository productRepository;
 	
-	@GetMapping(value = "/products/{id}")
-	public String getProduct(@PathVariable Long id, ModelMap model, HttpServletResponse response) throws IOException{
-		Optional<Product> optionalProduct = productRepository.findById(id);
+	@GetMapping(value = "/products/{productId}")
+	public String getProduct(@PathVariable Long productId, ModelMap model, HttpServletResponse response) throws IOException{
+		Optional<Product> optionalProduct = productRepository.findById(productId);
 		if(optionalProduct.isPresent()) {
 			Product product = optionalProduct.get();
 			model.put("product", product);
 		}else {
-			response.sendError(HttpStatus.NOT_FOUND.value(), "Product with id " + id + " not found!");
+			response.sendError(HttpStatus.NOT_FOUND.value(), "Product with id " + productId + " not found!");
 			return "product";
 		}
 		return "product";
 	}
 	
-	@PostMapping(value = "/products/{id}")
-	public String saveProduct(@PathVariable Long id, Product product) {	
+	@PostMapping(value = "/products/{productId}")
+	public String saveProduct(@PathVariable Long productId, Product product) {	
 		productRepository.save(product);
 		return "redirect:/products/" + product.getId();
-
 	}
 	
 	@PostMapping(value = "/products")
@@ -54,6 +60,22 @@ public class ProductController {
 		
 		productRepository.save(product);
 		return "redirect:/products/" + product.getId();
+	}
+	
+	@GetMapping("/p/{productName}")
+	public String productUserView(@PathVariable String productName, ModelMap model) {
+		if(productName != null) {
+			try {
+				String decodedProductName = URLDecoder.decode(productName, StandardCharsets.UTF_8.name());
+				Optional<Product> optionalProduct = productRepository.findByName(decodedProductName);
+				if(optionalProduct.isPresent()) {
+					model.put("product", optionalProduct.get());
+				}
+			} catch (UnsupportedEncodingException e) {
+				log.error("There was an error decoding a product URL", e);
+			}	
+		}
+		return "productUserView";
 	}
 
 }
