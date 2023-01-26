@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.freshvotes.model.Feature;
+import com.freshvotes.model.User;
 import com.freshvotes.service.FeatureService;
 
 @Controller
@@ -23,8 +25,8 @@ public class FeatureController {
 	private FeatureService featureService;
 	
 	@PostMapping
-	public String createFeature(@PathVariable Long productId) {
-		Feature feature = featureService.createFeature(productId);
+	public String createFeature(@AuthenticationPrincipal User user, @PathVariable Long productId) {
+		Feature feature = featureService.createFeature(productId, user);
 		return "redirect:/products/"+productId+"/features/"+feature.getId();
 	}
 	
@@ -39,7 +41,8 @@ public class FeatureController {
 	}
 	
 	@PostMapping(value = "/{featureId}")
-	public String updateFeature(Feature feature, @PathVariable Long productId, @PathVariable Long featureId) {
+	public String updateFeature(@AuthenticationPrincipal User user, Feature feature, @PathVariable Long productId, @PathVariable Long featureId) {
+		feature.setUser(user);
 		feature = featureService.save(feature);
 		
 		String encodedProductName;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.freshvotes.model.Feature;
 import com.freshvotes.model.Product;
+import com.freshvotes.model.User;
 import com.freshvotes.repository.FeatureRepository;
 import com.freshvotes.repository.ProductRepository;
 
@@ -19,13 +20,15 @@ public class FeatureService {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	public Feature createFeature(Long productId) {
+	public Feature createFeature(Long productId, User user) {
 		Feature feature = new Feature();
 		Optional<Product> optionalProduct = productRepository.findById(productId);
 		
 		if(optionalProduct.isPresent()) {
 			feature.setProduct(optionalProduct.get());
 			feature.setStatus("Pending review");
+			feature.setUser(user);
+			user.getFeatures().add(feature);
 			return featureRepository.save(feature);
 		}
 

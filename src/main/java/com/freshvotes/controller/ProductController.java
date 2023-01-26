@@ -48,7 +48,7 @@ public class ProductController {
 	@PostMapping(value = "/products/{productId}")
 	public String saveProduct(@PathVariable Long productId, Product product) {	
 		productRepository.save(product);
-		return "redirect:/products/" + product.getId();
+		return "redirect:/dashboard/";
 	}
 	
 	@PostMapping(value = "/products")
@@ -59,7 +59,7 @@ public class ProductController {
 		product.setUser(user);
 		
 		productRepository.save(product);
-		return "redirect:/products/" + product.getId();
+		return "redirect:/dashboard/" + product.getId();
 	}
 	
 	@GetMapping("/p/{productName}")
