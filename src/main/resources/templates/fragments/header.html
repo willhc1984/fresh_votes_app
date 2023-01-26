@@ -1,5 +1,5 @@
 	
-	<p th:fragment="headerElement" th:remove="tag">
+	<div th:fragment="headerElement" th:remove="tag">
 		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	
@@ -12,13 +12,13 @@
 	    <!-- JQuery -->
 	    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 		<script src="http://localhost:35729/livereload.js"></script>
-	</p>
+	</div>
 	
 	<div th:fragment="navbarElement" th:remove="tag">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="/">
-		    	<img src="/images/logo-icon.svg" alt="" width="40" height="34">
+		    	<i class="bi bi-card-checklist" style="font-size: 25px;"></i>
 		    </a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 		        <li class="nav-item">
-		          <a class="nav-link active" aria-current="page" href="#">Home</a>
+		          <a class="nav-link active" aria-current="page" href="/">Home</a>
 		        </li>
 		        <div sec:authorize="isAuthenticated()">
 			        <li class="nav-item">
@@ -52,9 +52,24 @@
 					});
 	        	</script>
 		      </div>
-	        	
-	        	
 		    </div>
 		  </div>
 		</nav>
+	</div>
+	
+	<div th:fragment="footerElement" th:remove="tag">
+		<hr style="margin: 2rem 5rem 2rem 5rem;" />
+		<div class="container-fluid">
+			<footer class="layout-footer text-center">
+				<div class="container">
+					<a href="https://github.com/willhc1984">
+						<i class="bi bi-github" style="font-size: 65px;"></i>
+					</a>
+					<a href="https://www.linkedin.com/in/william-henrique-campos-98568813a/">
+						<i class="bi bi-linkedin" style="font-size: 65px; padding-left: 15px;"></i>
+					</a>
+					<p class="footer-copy">&copy; 2023 - <b>Fresh Votes</b></p>
+				</div>
+			</footer>
+		</div>
 	</div>

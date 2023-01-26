@@ -19,5 +19,7 @@
       	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     	<button type="submit">Logout</input>
     </form>
+    
+    <div th:replace="fragments/header :: footerElement"></div>
   </body>
 </html>

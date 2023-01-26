@@ -6,7 +6,13 @@
   </head>
   <body>
   	<div th:replace="fragments/header :: navbarElement"></div>
-    <h1 style="margin-top: 80px;">Welcome to Fresh Votes APP!</h1>
-    <img class="mb-4" src="/images/logo-login.png" alt="logotipo" style="margin-top: 20px;" width="350" height="350" />
+  	
+  	<div class="container text-center">
+  		<h1 style="margin-top: 80px;">Welcome to Fresh Votes APP!</h1>
+    	<img class="mb-4" src="/images/logo-login.png" alt="logotipo" style="margin-top: 20px;" width="350" height="350" />
+  	</div>
+    
+    <div th:replace="fragments/header :: footerElement"></div>
+    
   </body>
 </html>
