@@ -1,5 +1,7 @@
 package com.freshvotes.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,16 @@ public class FeatureController {
 	@PostMapping(value = "/{featureId}")
 	public String updateFeature(Feature feature, @PathVariable Long productId, @PathVariable Long featureId) {
 		feature = featureService.save(feature);
-		return "redirect:/products/"+productId+"/features/"+feature.getId();
+		
+		String encodedProductName;
+		
+		try {
+			encodedProductName = URLEncoder.encode(feature.getProduct().getName(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return "redirect:/dasboard";
+		}
+		
+		return "redirect:/p/" + encodedProductName;
 	}
 	
 	
