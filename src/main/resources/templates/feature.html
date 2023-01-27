@@ -15,7 +15,8 @@
   				<h1>New Feature</h1>  
   			</div>
   			<div class="col-12 col-sm-4">
-  				<span class="badge bg-info text-dark" th:text="${feature.status}"></span>
+  			<span class="badge rounded-pill bg-dark" th:text="'User: ' + ${feature.user.getName()}"></span>
+  				<span class="badge rounded-pill bg-warning text-dark" th:text="'Status: ' + ${feature.status}"></span>
   			</div>
   		</div>
   		
@@ -25,15 +26,20 @@
 	      	<input type="hidden" th:field="${feature.product}" />
 	      	<input type="hidden" th:field="${feature.status}" />
 	      	
+	      	
 	      	<div class="mb-3">
 			  <label for="exampleFormControlInput1" class="form-label">Title</label>
-			  <input type="text" class="form-control" th:field="${feature.title}" id="exampleFormControlInput1" placeholder="Feature title" />
+			  <input type="text" class="form-control" th:field="${feature.title}"
+			  		th:attrappend="disabled=${user.id == feature.user.id ? null : 'disabled'}" 
+			  		id="exampleFormControlInput1" placeholder="Feature title" />
 			</div>
 			<div class="mb-3">
 			  <label for="exampleFormControlInput1" class="form-label">Description</label>
-			  <textarea type="text" class="form-control" th:field="${feature.description}" id="exampleFormControlInput1" placeholder="Feature description"></textarea>
+			  <textarea type="text" class="form-control" th:field="${feature.description}" 
+			  		th:attrappend="disabled=${user.id == feature.user.id ? null : 'disabled'}"
+			  		id="exampleFormControlInput1" placeholder="Feature description"></textarea>
 			</div>
-			<div>
+			<div th:if="${user.id == feature.user.id}">
 				<button class="btn btn-primary" type="submit">Save</button>
 			</div>
 	    	

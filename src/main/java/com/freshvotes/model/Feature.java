@@ -58,5 +58,12 @@ public class Feature {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@Override
+	public String toString() {
+		return "Feature [id=" + id + ", title=" + title + ", description=" + description + ", status=" + status
+				+ ", product=" + product + ", user=" + user + "]";
+	}
+	
 
 }
