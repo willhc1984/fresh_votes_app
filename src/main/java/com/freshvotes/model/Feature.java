@@ -1,10 +1,16 @@
 package com.freshvotes.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +27,8 @@ public class Feature {
 	private Product product;
 	@ManyToOne
 	private User user;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "feature")
+	private Set<Comment> comments = new HashSet<>();	
 	
 	public Long getId() {
 		return id;
@@ -59,6 +67,12 @@ public class Feature {
 		this.user = user;
 	}
 	
+	public Set<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
 	@Override
 	public String toString() {
 		return "Feature [id=" + id + ", title=" + title + ", description=" + description + ", status=" + status

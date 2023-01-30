@@ -42,8 +42,14 @@
 			<div th:if="${user.id == feature.user.id}">
 				<button class="btn btn-primary" type="submit">Save</button>
 			</div>
-	    	
 	    </form>  	  
+	    
+	    <div>
+	    	<h2>Comments:</h2>
+	    	<div th:each="comment : ${comments}">
+	    		<span th:text="${comment.text}"></span>
+	    	</div>
+	    </div>
 	    
   	</div>
   	
