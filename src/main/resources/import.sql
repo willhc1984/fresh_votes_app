@@ -1,7 +1,5 @@
 insert into tb_users(username, password, name) values ('admin@master', '$2a$12$CtVEGjY3UJUJB91S5OrJjOxFIOQ9h1TGxrMAMWkBJOVMDQ11fq6RK', 'admin');
-
 insert into tb_users(username, password, name) values ('maria@maria', '$2a$12$CtVEGjY3UJUJB91S5OrJjOxFIOQ9h1TGxrMAMWkBJOVMDQ11fq6RK', 'maria');
-
 insert into tb_users(username, password, name) values ('joao@joao', '$2a$12$CtVEGjY3UJUJB91S5OrJjOxFIOQ9h1TGxrMAMWkBJOVMDQ11fq6RK', 'joao');
 
 insert into tb_authorities(authority, user_id) values ('ROLE_USER', 1);
@@ -28,5 +26,18 @@ insert into tb_features(description, status, title, product_id, user_id) values 
 insert into tb_features(description, status, title, product_id, user_id) values ('Make database better', 'Pending review', 'Data base improving', 2, 1);
 insert into tb_features(description, status, title, product_id, user_id) values ('Make database better', 'Pending review', 'Data base improving', 3, 2);
 insert into tb_features(description, status, title, product_id, user_id) values ('Make database better', 'Pending review', 'Data base improving', 1, 2);
-insert into tb_features(description, status, title, product_id, user_id) values ('Make database better', 'Pending review', 'Data base improving', 10, 2);
-insert into tb_features(description, status, title, product_id, user_id) values ('Make database better', 'Pending review', 'Data base improving', 10, 1);
+insert into tb_features(description, status, title, product_id, user_id) values ('Make database better', 'Pending review', 'Data base improving', 1, 2);
+insert into tb_features(description, status, title, product_id, user_id) values ('Make database better', 'Pending review', 'Data base improving', 1, 1);
+
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-01', null, 1, 1);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-02', 1, 1, 2);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-03', 1, 1, 3);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-04', 2, 1, 1);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-05', 2, 1, 2);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-06', 2, 1, 3);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-07', 4, 1, 1);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-08', 4, 1, 2);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-09', 4, 1, 3);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-01', null, 2, 1);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-02', 1, 2, 2);
+insert into tb_comments(text, created_date, comment_id, feature_id, user_id) values ('Teste comment #1', '2023-01-03', 1, 2, 3);

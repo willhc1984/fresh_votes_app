@@ -4,8 +4,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "tb_votes")
+//@Entity
+//@Table(name = "tb_votes")
 public class Vote {
 	
 	@EmbeddedId

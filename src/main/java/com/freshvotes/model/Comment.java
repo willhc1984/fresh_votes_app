@@ -1,8 +1,10 @@
 package com.freshvotes.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,25 +14,35 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tb_comments")
-public class Comment{
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class Comment implements Comparable<Comment>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 5000)
 	private String Text;
-	@ManyToOne
+	@ManyToOne 
+	@JsonIgnore
 	private User user;
-	@ManyToOne
+	@ManyToOne 
+	@JsonIgnore
 	private Feature feature;
 	@OneToMany(mappedBy = "comment")
-	private List<Comment> comments = new ArrayList<>();
+	@OrderBy("createdDate, id")
+	private SortedSet<Comment> comments = new TreeSet<>();
 	@ManyToOne
 	@JoinColumn(name = "comment_id", nullable = true)
+	@JsonIgnore
 	private Comment comment;
 	private Date createdDate;
 	
@@ -58,10 +70,10 @@ public class Comment{
 	public void setFeature(Feature feature) {
 		this.feature = feature;
 	}
-	public List<Comment> getComments() {
+	public SortedSet<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(List<Comment> comments) {
+	public void setComments(SortedSet<Comment> comments) {
 		this.comments = comments;
 	}
 	public Comment getComment() {
@@ -76,5 +88,32 @@ public class Comment{
 	public void setCreatedDate(Date created_date) {
 		this.createdDate = created_date;
 	}
-
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		return Objects.equals(id, other.id);
+	}
+	
+	@Override
+	public int compareTo(Comment that) {
+		int comparedValue = this.createdDate.compareTo(that.createdDate);
+		if(comparedValue == 0) {
+			this.id.compareTo(that.id);
+		}
+		return comparedValue;
+	}
+	
+	
 }

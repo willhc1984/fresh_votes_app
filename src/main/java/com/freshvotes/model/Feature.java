@@ -1,7 +1,8 @@
 package com.freshvotes.model;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,10 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "tb_features")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Feature {
 	
 	@Id
@@ -28,7 +34,8 @@ public class Feature {
 	@ManyToOne
 	private User user;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "feature")
-	private Set<Comment> comments = new HashSet<>();	
+	@OrderBy("createdDate, id")
+	private SortedSet<Comment> comments = new TreeSet<>();	
 	
 	public Long getId() {
 		return id;
@@ -67,10 +74,10 @@ public class Feature {
 		this.user = user;
 	}
 	
-	public Set<Comment> getComments() {
+	public SortedSet<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(Set<Comment> comments) {
+	public void setComments(SortedSet<Comment> comments) {
 		this.comments = comments;
 	}
 	@Override
