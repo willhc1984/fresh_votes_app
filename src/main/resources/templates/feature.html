@@ -3,7 +3,24 @@
   <head>
     <title>Fresh Votes</title>
     <div th:replace="fragments/header :: headerElement"></div>
-  </head>
+    
+    <script type="text/javascript">
+    	$(function (){
+			$("button[id*='replyBtn-']").click(function (){
+				$("form[id*='replyForm-']:not(.d-none)").each(function (){
+					let commentId = $(this).prop("id").split("-")[1];
+					let formId = "replyForm-" + commentId;
+					$("#"+formId).addClass("d-none");
+				})
+				
+				let commentId = $(this).prop("id").split("-")[1];
+				let formId = "replyForm-" + commentId;
+				$("#"+formId).removeClass("d-none");
+			})
+		})
+    </script>  
+    
+   </head>
   
   <body>  
   	<div th:replace="fragments/header :: navbarElement"></div>
