@@ -39,11 +39,12 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.headers().frameOptions().disable();
 		http
+			.exceptionHandling().accessDeniedPage("/accessDenied").and()
 	        .authorizeRequests()
 	        	.antMatchers("/**/*.*").permitAll()
 	        	.antMatchers("/").permitAll()
-	        	.antMatchers("/register/**").permitAll()
-	        	.anyRequest().hasRole("USER").and()
+	        	.antMatchers("/votes").hasAnyRole("OWNER","USER")
+	        	.anyRequest().hasRole("OWNER").and()
 	        .formLogin()
 	        	.loginPage("/login")
 	        	.permitAll()

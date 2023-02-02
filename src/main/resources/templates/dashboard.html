@@ -26,8 +26,9 @@
     		<div class="col-sm-6 col-md-6 col-lg-4" th:each="product : ${products}">    		
     			<div class="card border-dark mb-3" style="margin: 1em; border-radius: 10px;">
 				  <div class="card-body text-primary">
-				    <h5 class="card-title" th:text="${product.name}">Special title treatment</h5>
-				    <h6 class="card-subtitle mb-2 text-primary" th:text="${product.published} ? 'Published' : 'Not Published'">Special title treatment</h6>
+				    <h5 class="card-title" th:text="'Product name: ' + ${product.name}">Special title treatment</h5>
+				    <h6 class="card-subtitle mb-2 text-primary" th:text="${product.published} ? 'Status: Published' : 'Status: Not Published'">Special title treatment</h6>
+				     <h6 class="card-subtitle mb-2 text-primary" th:text="'Owner: ' + ${product.user.name}">Special title treatment</h6>
 				    <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary" style="margin-top: .5em;">Edit</a>
 				    <a th:href="@{/p/{productName}(productName=${product.name})}" class="btn btn-primary" style="margin-top: .5em;">View Feature Requests</a>
 				  </div>

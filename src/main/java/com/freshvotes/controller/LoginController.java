@@ -32,5 +32,10 @@ public class LoginController {
 		userService.save(user);
 		return "redirect:login";
 	}
+	
+	@GetMapping(value = "/accessDenied")
+	public String accessDenied() {
+		return "accessDenied";
+	}
 
 }

@@ -41,7 +41,6 @@ public class FeatureController {
 		Optional<Product> optionalProduct = productRepository.findById(productId);
 		Product product = optionalProduct.get();
 		featureService.createFeature(product, user, feature);
-		System.out.println(product.getName());
 		String encodedName = URLEncoder.encode(product.getName());
 		return "redirect:/p/"+encodedName;
 	}
