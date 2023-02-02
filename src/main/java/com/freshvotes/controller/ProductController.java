@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.freshvotes.model.Feature;
 import com.freshvotes.model.Product;
 import com.freshvotes.model.User;
 import com.freshvotes.repository.ProductRepository;
@@ -37,6 +38,14 @@ public class ProductController {
 	public String createProduct(ModelMap model) {
 		model.put("product", new Product());
 		return "addProduct";
+	}
+	
+	@GetMapping(value = "/products/{productId}/features")
+	public String createFeature (ModelMap model, @PathVariable Long productId) {
+		Product product = productRepository.getById(productId);
+		model.put("feature", new Feature());
+		model.put("product", product);
+		return "addFeature";
 	}
 	
 	@GetMapping(value = "/products/{productId}")
@@ -79,6 +88,7 @@ public class ProductController {
 				}
 			} catch (UnsupportedEncodingException e) {
 				log.error("There was an error decoding a product URL", e);
+				System.out.println("eita...");
 			}	
 		}
 		return "productUserView";

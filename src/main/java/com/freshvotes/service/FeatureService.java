@@ -20,18 +20,14 @@ public class FeatureService {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	public Feature createFeature(Long productId, User user) {
-		Feature feature = new Feature();
-		Optional<Product> optionalProduct = productRepository.findById(productId);
-		
-		if(optionalProduct.isPresent()) {
-			feature.setProduct(optionalProduct.get());
-			feature.setStatus("Pending review");
-			feature.setUser(user);
-			user.getFeatures().add(feature);
-			return featureRepository.save(feature);
-		}
-
+	public Feature createFeature(Product product, User user, Feature feature) {
+	
+		feature.setProduct(product);
+		feature.setStatus("Pending review");
+		feature.setUser(user);
+		user.getFeatures().add(feature);
+		featureRepository.save(feature);
+	
 		return feature;
 	}
 
