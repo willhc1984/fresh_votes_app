@@ -16,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -31,6 +32,12 @@ public class ProductController {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@GetMapping(value = "/product")
+	public String createProduct(ModelMap model) {
+		model.put("product", new Product());
+		return "addProduct";
+	}
 	
 	@GetMapping(value = "/products/{productId}")
 	public String getProduct(@PathVariable Long productId, ModelMap model, HttpServletResponse response) throws IOException{
@@ -52,14 +59,13 @@ public class ProductController {
 	}
 	
 	@PostMapping(value = "/products")
-	private String createProduct(@AuthenticationPrincipal User user) {
-		Product product = new Product();
+	private String createProduct(@AuthenticationPrincipal User user, @ModelAttribute Product product) {
 		
 		product.setPublished(false);
 		product.setUser(user);
 		
 		productRepository.save(product);
-		return "redirect:/dashboard/" + product.getId();
+		return "redirect:/dashboard/";
 	}
 	
 	@GetMapping("/p/{productName}")

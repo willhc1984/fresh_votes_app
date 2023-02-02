@@ -29,7 +29,6 @@ public class LoginController {
 	
 	@PostMapping(value = "/register")
 	public String registerPost(@ModelAttribute User user) {
-		System.out.println(user.toString());
 		userService.save(user);
 		return "redirect:login";
 	}
