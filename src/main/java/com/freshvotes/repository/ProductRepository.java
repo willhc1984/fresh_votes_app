@@ -13,7 +13,7 @@ import com.freshvotes.model.User;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	List<Product> findByUser(User user);
-	
+	List<Product> findByPublished(Boolean bool);
 	Optional<Product> findByName(String name);
 	
 }

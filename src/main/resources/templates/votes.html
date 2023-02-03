@@ -9,7 +9,39 @@
   	
   	<div class="container text-center">
   		<h1 style="margin-top: 80px;">Thumbs up or down for vote</h1>    	
-    	
+  	</div>
+  	
+  	<div class="container">
+  		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">Title</th>
+		      <th scope="col">Description</th>
+		      <th scope="col">Product name</th>
+		      <th scope="col">Status</th>
+		      <th scope="col">Vote</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="feature : ${features}">
+		      <td th:text="${feature.title}"></td>
+		      <td th:text="${feature.description}"></td>
+		      <td th:text="${feature.product.name}"></td>
+		      <td th:text="${feature.status}"></td>
+		      <td>
+		      	<a href="/">
+		      		<i class="bi bi-hand-thumbs-up-fill" style="font-size: 1.5em; color: green;"></i>
+		      	</a>
+		      	<a href="/">
+		      		<i class="bi bi-hand-thumbs-down-fill" style="font-size: 1.5em; color:red;"></i>
+		      	</a>
+    			
+		      </td>
+		      
+		    </tr>
+		  </tbody>
+		</table>
+  		  	
   	</div>
     
     <div th:replace="fragments/header :: footerElement"></div>
