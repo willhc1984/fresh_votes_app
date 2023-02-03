@@ -3,6 +3,9 @@ package com.freshvotes.model;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Embeddable
@@ -14,7 +17,7 @@ public class VoteId implements Serializable{
 	private User user;
 	@ManyToOne
 	private Feature feature;
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -27,7 +30,5 @@ public class VoteId implements Serializable{
 	public void setFeature(Feature feature) {
 		this.feature = feature;
 	}
-	
-	
 
 }

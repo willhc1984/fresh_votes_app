@@ -24,8 +24,8 @@ public class DashBoardController {
 	}	
 	
 	@GetMapping(value = "/dashboard")
-	private String dashboard(ModelMap model) {
-		List<Product> products = productRepository.findAll();
+	private String dashboard(@AuthenticationPrincipal User user, ModelMap model) {
+		List<Product> products = productRepository.findByUser(user);
 		model.put("products", products);
 		return "dashboard";
 	}

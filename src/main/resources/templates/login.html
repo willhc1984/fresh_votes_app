@@ -35,7 +35,8 @@
   <div class="container">
   	<main class="form-signin">
 	  <form action="" method="post">
-	    <img class="mb-4" src="/images/logo-login.png" alt="" width="92" height="77" />
+	    <i class="bi bi-hand-thumbs-up-fill" style="font-size: 5em; color: green;"></i>
+    	<i class="bi bi-hand-thumbs-down-fill" style="font-size: 5em; color:red;"></i>
 	    <h1 class="h3 mb-3 fw-normal">Please log in</h1>
 	    
 	    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -57,7 +58,7 @@
 	
 	    <div class="form-floating">
 	      <input type="email" class="form-control" name="username" id="floatingInput" placeholder="Login name">
-	      <label for="floatingInput">Login</label>
+	      <label for="floatingInput">Email</label>
 	    </div>
 	    <div class="form-floating">
 	      <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">

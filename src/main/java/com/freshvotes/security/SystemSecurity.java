@@ -42,6 +42,7 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 			.exceptionHandling().accessDeniedPage("/accessDenied").and()
 	        .authorizeRequests()
 	        	.antMatchers("/**/*.*").permitAll()
+	        	.antMatchers("/register").permitAll()
 	        	.antMatchers("/").permitAll()
 	        	.antMatchers("/votes").hasAnyRole("OWNER","USER")
 	        	.anyRequest().hasRole("OWNER").and()
