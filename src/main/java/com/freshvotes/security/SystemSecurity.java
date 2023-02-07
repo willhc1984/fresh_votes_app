@@ -3,6 +3,7 @@ package com.freshvotes.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -44,8 +45,10 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 	        	.antMatchers("/**/*.*").permitAll()
 	        	.antMatchers("/register").permitAll()
 	        	.antMatchers("/").permitAll()
-	        	.antMatchers("/votes").hasAnyRole("OWNER","USER")
-	        	.anyRequest().hasRole("OWNER").and()
+	        	.antMatchers("/votes").authenticated()
+	        	.antMatchers("/votes/**").hasAnyRole("USER","OWNER")
+	        	.antMatchers("/dashboard").hasRole("OWNER")
+	        	.and()
 	        .formLogin()
 	        	.loginPage("/login")
 	        	.permitAll()

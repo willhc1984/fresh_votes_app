@@ -29,13 +29,20 @@
 		      <td th:text="${feature.product.name}"></td>
 		      <td th:text="${feature.status}"></td>
 		      <td>
-		      	<a href="/">
-		      		<i class="bi bi-hand-thumbs-up-fill" style="font-size: 1.5em; color: green;"></i>
-		      	</a>
-		      	<a href="/">
-		      		<i class="bi bi-hand-thumbs-down-fill" style="font-size: 1.5em; color:red;"></i>
-		      	</a>
-    			
+		      	<form th:object="${vote}" th:action="@{/votes/{featureId}/{userId} (featureId=${feature.id}, userId=${user.id})}"  method="POST">		      		
+		      		<input type="hidden" th:value="${user.id}" th:name="${user.id}" />
+		      		<input type="hidden" th:value="${feature.id}" th:name="${feature.id}" />
+		      		<input type="hidden" th:value="1" th:name="upvote" />
+		      		<button class="btn btn-light" type="submit"><i class="bi bi-hand-thumbs-up-fill" style="font-size: 1.5em; color:green;"></i></i></button>
+		      	</form>    			
+		      </td>
+		      <td>
+		      	<form th:object="${vote}" th:action="@{/votes/{featureId}/{userId} (featureId=${feature.id}, userId=${user.id})}"  method="POST">
+		      		<input type="hidden" th:value="${user.id}" th:name="${user.id}" />
+		      		<input type="hidden" th:value="${feature.id}" th:name="${feature.id}" />
+		      		<input type="hidden" th:value="0" name="upvote" />
+		      		<button class="btn btn-light" type="submit"><i class="bi bi-hand-thumbs-down-fill" style="font-size: 1.5em; color:red;"></i></i></button>
+		      	</form>    			
 		      </td>
 		      
 		    </tr>

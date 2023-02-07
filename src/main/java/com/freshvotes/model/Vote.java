@@ -24,5 +24,12 @@ public class Vote {
 	public void setUpvote(Boolean upvote) {
 		this.upvote = upvote;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Vote [pk=" + pk + ", upvote=" + upvote + "]";
+	}
+	
+	
+	
 }

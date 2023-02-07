@@ -30,5 +30,12 @@ public class VoteId implements Serializable{
 	public void setFeature(Feature feature) {
 		this.feature = feature;
 	}
+	
+	@Override
+	public String toString() {
+		return "VoteId [user=" + user + ", feature=" + feature + "]";
+	}
+	
+	
 
 }
