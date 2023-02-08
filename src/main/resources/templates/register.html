@@ -31,10 +31,13 @@
   	<div th:replace="fragments/header :: navbarElement"></div>
    
 	<main class="form-signin">
-	  <form th:action="@{/register}" th:object="${user}" method="post">
+	  <form class="was-validated" th:action="@{/register}" th:object="${user}" method="post">
+	  
 	    <i class="bi bi-hand-thumbs-up-fill" style="font-size: 5em; color: green;"></i>
     	<i class="bi bi-hand-thumbs-down-fill" style="font-size: 5em; color:red;"></i>
 	    <h1 class="h3 mb-3 fw-normal">Register for an account</h1>
+	    
+	    <div th:replace="fragments/alerts"></div>
 	    
 	    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 	    
@@ -46,27 +49,27 @@
 	      <input type="email" class="form-control" th:field="${user.username}" name="username" id="floatingInput" placeholder="Your email">
 	      <label for="floatingInput">Your best email</label>
 	    </div>
+	    
 	    <div class="form-floating">
 	      <input type="password" class="form-control" th:field="${user.password}" name="password" id="floatingPassword" placeholder="Your Password">
 	      <label for="floatingPassword">Password</label>
+	      <div th:errors = "*{password}" class="invalid-feedback" th:if="${#fields.hasErrors('password')}">
+		      teste
+		  </div>
+	      <p th:errors = "*{password}" class="text-danger"
+              th:if="${#fields.hasErrors('password')}"></p>
 	    </div>
+	    
 	    <div class="form-floating">
 	      <input type="password" class="form-control" name="passwordConfirm" id="floatingPassword" placeholder="Your Password">
 	      <label for="floatingPassword">Confirm Password</label>
 	    </div>
 	
 	    <button class="w-100 btn btn-lg btn-primary" type="submit">Create account</button>
-	    <button class="w-100 btn btn-lg btn-primary" type="submit" id="loginPage">Login page</button>
-	
+		<a class="w-100 btn btn-lg btn-primary" href="/login" role="button" style="margin-top: 10px;">Login page</a>
 	  </form>
+	  
 	</main>
-	
-  	<script type="text/javascript">
-		$(function(){
-			$("#loginPage").click(function(){
-				window.location.href = "/login";
-			})
-		})
-	</script>
+
   </body>
 </html>
