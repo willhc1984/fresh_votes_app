@@ -31,7 +31,7 @@
   	<div th:replace="fragments/header :: navbarElement"></div>
    
 	<main class="form-signin">
-	  <form action="/register" method="post">
+	  <form th:action="@{/register}" th:object="${user}" method="post">
 	    <i class="bi bi-hand-thumbs-up-fill" style="font-size: 5em; color: green;"></i>
     	<i class="bi bi-hand-thumbs-down-fill" style="font-size: 5em; color:red;"></i>
 	    <h1 class="h3 mb-3 fw-normal">Register for an account</h1>

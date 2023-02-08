@@ -17,15 +17,16 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public User save(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		
+	public User save(User user) {	
+	
+		user.setPassword(passwordEncoder.encode(user.getPassword()));			
 		Authority authority = new Authority();
 		authority.setAuthority("ROLE_USER");
 		authority.setUser(user);
 		user.getAuthorities().add(authority);
-		
+			
 		return userRepository.save(user);
+
 	}
 	
 

@@ -48,7 +48,6 @@ public class VoteController {
 	public String upVote(@PathVariable Long featureId, @AuthenticationPrincipal User user,
 			@ModelAttribute Vote vote) {
 		
-		//System.out.println(vote.getUpvote());
 		VoteId voteId = new VoteId();
 		Optional<Feature> optionalFeature = featureService.findById(featureId);
 		
@@ -58,7 +57,6 @@ public class VoteController {
 		
 		voteId.setUser(user);
 		vote.setPk(voteId);
-		vote.setUpvote(vote.getUpvote());
 		voteRepository.save(vote);
 		
 		return "redirect:/votes";

@@ -29,8 +29,11 @@ public class LoginController {
 	
 	@PostMapping(value = "/register")
 	public String registerPost(@ModelAttribute User user) {
-		userService.save(user);
+		if(userService.save(user) != null) {
+			return "redirect:login";
+		}
 		return "redirect:login";
+	
 	}
 	
 	@GetMapping(value = "/accessDenied")
