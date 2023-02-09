@@ -31,7 +31,8 @@
   	<div th:replace="fragments/header :: navbarElement"></div>
    
 	<main class="form-signin">
-	  <form class="was-validated" th:action="@{/register}" th:object="${user}" method="post">
+	
+	  <form th:action="@{/register}" th:object="${user}" method="post">
 	  
 	    <i class="bi bi-hand-thumbs-up-fill" style="font-size: 5em; color: green;"></i>
     	<i class="bi bi-hand-thumbs-down-fill" style="font-size: 5em; color:red;"></i>
@@ -44,30 +45,32 @@
 	    <div class="form-floating">
 	      <input type="text" class="form-control" th:field="${user.name}" name="name" id="floatingInput" placeholder="Full name">
 	      <label for="floatingInput">Name</label>
+	      <p th:errors = "*{name}" class="text-danger"
+              th:if="${#fields.hasErrors('name')}"></p>
 	    </div>
 	    <div class="form-floating">
 	      <input type="email" class="form-control" th:field="${user.username}" name="username" id="floatingInput" placeholder="Your email">
 	      <label for="floatingInput">Your best email</label>
+	      <p th:errors = "*{username}" class="text-danger"
+              th:if="${#fields.hasErrors('username')}"></p>
 	    </div>
 	    
 	    <div class="form-floating">
 	      <input type="password" class="form-control" th:field="${user.password}" name="password" id="floatingPassword" placeholder="Your Password">
 	      <label for="floatingPassword">Password</label>
-	      <div th:errors = "*{password}" class="invalid-feedback" th:if="${#fields.hasErrors('password')}">
-		      teste
-		  </div>
 	      <p th:errors = "*{password}" class="text-danger"
               th:if="${#fields.hasErrors('password')}"></p>
 	    </div>
 	    
 	    <div class="form-floating">
-	      <input type="password" class="form-control" name="passwordConfirm" id="floatingPassword" placeholder="Your Password">
+	      <input type="password" class="form-control" th:name="confirm"  id="floatingPassword" placeholder="Confirm Password">
 	      <label for="floatingPassword">Confirm Password</label>
 	    </div>
 	
 	    <button class="w-100 btn btn-lg btn-primary" type="submit">Create account</button>
 		<a class="w-100 btn btn-lg btn-primary" href="/login" role="button" style="margin-top: 10px;">Login page</a>
 	  </form>
+
 	  
 	</main>
 

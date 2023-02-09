@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.freshvotes.model.User;
@@ -34,11 +35,16 @@ public class LoginController {
 	
 	@PostMapping(value = "/register")
 	public String registerPost(@Valid @ModelAttribute User user, BindingResult result, 
-			RedirectAttributes attr, Model model) {
+			RedirectAttributes attr, Model model, @RequestParam(value="confirm") String confirm) {
+		
+		if(!confirm.equals(user.getPassword())) {
+			attr.addFlashAttribute("fail", "Password doesn't match.");
+			return "redirect:/register";
+		}
 		
 		User existingUser = userService.findByUsername(user.getUsername());
 		
-		if(existingUser != null && existingUser.getUsername() != null && !existingUser.getUsername().isEmpty()) {
+    	if(existingUser != null && existingUser.getUsername() != null && !existingUser.getUsername().isEmpty()) {
 			attr.addFlashAttribute("fail", "There is already an account registered with the same email");
 			return "redirect:/register";
 		}

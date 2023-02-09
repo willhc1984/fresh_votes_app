@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,11 +26,12 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
+	@Column(unique = true)
+	@NotBlank(message = "*Email/login is mandatory.")
 	private String username;
-	@NotBlank
+	@NotBlank(message = "*Password is mandatory.")
 	private String password;
-	@NotBlank
+	@NotBlank(message = "*Name is mandatory.")
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
 	Set<Authority> authorities = new HashSet<>();
