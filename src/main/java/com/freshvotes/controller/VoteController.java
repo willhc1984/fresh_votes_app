@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.freshvotes.model.Feature;
 import com.freshvotes.model.User;
@@ -46,7 +47,7 @@ public class VoteController {
 	
 	@RequestMapping(value = "/votes/{featureId}/{userId}", method = RequestMethod.POST)
 	public String upVote(@PathVariable Long featureId, @AuthenticationPrincipal User user,
-			@ModelAttribute Vote vote) {
+			@ModelAttribute Vote vote, RedirectAttributes attr) {
 		
 		VoteId voteId = new VoteId();
 		Optional<Feature> optionalFeature = featureService.findById(featureId);
@@ -59,6 +60,7 @@ public class VoteController {
 		vote.setPk(voteId);
 		voteRepository.save(vote);
 		
+		attr.addFlashAttribute("success", "Confirmed vote!");
 		return "redirect:/votes";
 	}
 
