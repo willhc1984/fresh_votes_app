@@ -1,0 +1,71 @@
+<!doctype html>
+<html xmlns:th="http://thymeleaf.org">
+  <head>
+    <title>Fresh Votes</title>
+    <div th:replace="fragments/header :: headerElement"></div>
+   </head>
+  
+  <body>  
+  	<div th:replace="fragments/header :: navbarElement"></div>
+  	
+  	<div class="container text-center">
+  		<h1 style="margin-top: 80px;">Thumbs up or down for vote</h1>  
+  		<div th:replace="fragments/alerts"></div>  	
+  	</div>
+  	
+  	<div class="container">
+  		<table class="table table-hover">
+		    <thead>
+		        <tr>
+			      <th scope="col">Title</th>
+			      <th scope="col">Description</th>
+			      <th scope="col">Product name</th>
+			      <th scope="col">Status</th>
+			      <th scope="col">Vote</th>
+			    </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="feature, iStat : ${featurePage.content}"
+		            th:style="${iStat.odd}? 'font-weight: bold;'"
+		            th:alt-title="${iStat.even}? 'even' : 'odd'">
+		            <td th:text="${feature.title}" />
+		            <td th:text="${feature.description}" />
+		            <td th:text="${feature.product.name}" />
+		            <td th:text="${feature.status}" />
+		            <td>
+				      	<form th:object="${vote}" th:action="@{/votes/{featureId}/{userId} (featureId=${feature.id}, userId=${user.id})}"  method="POST">		      		
+				      		<input type="hidden" th:value="${user.id}" th:name="${user.id}" />
+				      		<input type="hidden" th:value="${feature.id}" th:name="${feature.id}" />
+				      		<input type="hidden" th:value="1" th:name="upvote" />
+				      		<button class="btn btn-light" type="submit"><i class="bi bi-hand-thumbs-up-fill" style="font-size: 1.5em; color:green;"></i></i></button>
+				      	</form>    			
+				      </td>
+				      <td>
+				      	<form th:object="${vote}" th:action="@{/votes/{featureId}/{userId} (featureId=${feature.id}, userId=${user.id})}"  method="POST">
+				      		<input type="hidden" th:value="${user.id}" th:name="${user.id}" />
+				      		<input type="hidden" th:value="${feature.id}" th:name="${feature.id}" />
+				      		<input type="hidden" th:value="0" name="upvote" />
+				      		<button class="btn btn-light" type="submit"><i class="bi bi-hand-thumbs-down-fill" style="font-size: 1.5em; color:red;"></i></i></button>
+				      	</form>    			
+		      		</td>
+		        </tr>
+		    </tbody>
+		</table>
+	
+		<nav aria-label="...">
+		  <ul class="pagination pagination-md justify-content-center" th:if="${featurePage.totalPages > 0}">
+		    <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+		    	<a class="page-link" th:href="@{/votesPaginated(size=${featurePage.size}, page=${pageNumber})}"
+			        th:text=${pageNumber}></a>
+		    </li>
+		  </ul>
+		</nav>
+		
+		
+  	</div>
+  	
+  	
+	<div th:replace="fragments/header :: footerElement"></div>
+    
+  </body>
+</html>

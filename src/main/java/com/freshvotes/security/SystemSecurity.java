@@ -47,6 +47,7 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 	        	.antMatchers("/").permitAll()
 	        	.antMatchers("/votes").authenticated()
 	        	.antMatchers("/votes/**").hasAnyRole("USER","OWNER")
+	        	.antMatchers("/votesPaginated/**").hasAnyRole("USER","OWNER")
 	        	.antMatchers("/dashboard").hasRole("OWNER")
 	        	.and()
 	        .formLogin()

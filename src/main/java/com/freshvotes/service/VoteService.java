@@ -13,6 +13,8 @@ public class VoteService {
 	
 	@Autowired
 	private VoteRepository voteRepository;
+	
+	
 
 
 }
