@@ -38,7 +38,7 @@ public class User {
 	Set<Authority> authorities = new HashSet<>();
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "user")
 	Set<Product> products = new HashSet<>();
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
 	private Set<Feature> features = new HashSet<>();
 	
 	public Long getId() {

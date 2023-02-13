@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +27,9 @@ import com.freshvotes.model.Feature;
 import com.freshvotes.model.Product;
 import com.freshvotes.model.User;
 import com.freshvotes.repository.ProductRepository;
+import com.freshvotes.service.ProductService;
+
+import net.bytebuddy.matcher.ModifierMatcher.Mode;
 
 
 @Controller
@@ -34,11 +40,32 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepository;
 	
+	@Autowired
+	private ProductService productService;
+	
 	@GetMapping(value = "/product")
 	public String createProduct(ModelMap model) {
 		model.put("product", new Product());
 		return "addProduct";
 	}
+	
+	@PostMapping(value = "/products")
+	private String createProduct(@Valid Product product, Model model,
+			@AuthenticationPrincipal User user, BindingResult result) {
+		
+		System.out.println(result);
+		
+		if(result.hasErrors()) {
+			return "redirect:/product";
+		}
+		
+		product.setPublished(false);
+		product.setUser(user);
+		
+		productRepository.save(product);
+		return "redirect:/dashboard/";
+	}
+	
 	
 	@GetMapping(value = "/products/{productId}/features")
 	public String createFeature (ModelMap model, @PathVariable Long productId) {
@@ -67,16 +94,6 @@ public class ProductController {
 		return "redirect:/dashboard/";
 	}
 	
-	@PostMapping(value = "/products")
-	private String createProduct(@AuthenticationPrincipal User user, @ModelAttribute Product product) {
-		
-		product.setPublished(false);
-		product.setUser(user);
-		
-		productRepository.save(product);
-		return "redirect:/dashboard/";
-	}
-	
 	@GetMapping("/p/{productName}")
 	public String productUserView(@PathVariable String productName, ModelMap model) {
 		if(productName != null) {
@@ -92,6 +109,13 @@ public class ProductController {
 			}	
 		}
 		return "productUserView";
+	}
+	
+	@GetMapping(value = "/product/{idProduct}")
+	public String deleteProductById(@PathVariable Long id) {
+		productService.deleteById(id);
+		return "dashboard";
+		
 	}
 
 }

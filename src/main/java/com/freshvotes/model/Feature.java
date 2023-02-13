@@ -32,7 +32,7 @@ public class Feature {
 	private Product product;
 	@ManyToOne
 	private User user;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "feature")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "feature")
 	@OrderBy("createdDate, id")
 	private SortedSet<Comment> comments = new TreeSet<>();	
 	

@@ -22,6 +22,8 @@
 			      <th scope="col">Product name</th>
 			      <th scope="col">Status</th>
 			      <th scope="col">Vote</th>
+			      <th scope="col"></th>
+			      <th scope="col">Comments</th>
 			    </tr>
 		    </thead>
 		    <tbody>
@@ -47,6 +49,11 @@
 				      		<input type="hidden" th:value="0" name="upvote" />
 				      		<button class="btn btn-light" type="submit"><i class="bi bi-hand-thumbs-down-fill" style="font-size: 1.5em; color:red;"></i></i></button>
 				      	</form>    			
+		      		</td>
+		      		<td>
+		      			<a class="btn btn-light" th:href="@{/products/{productId}/features/{featureId} (productId=${feature.product.id}, featureId=${feature.id})}" role="button">
+		      				<i class="bi bi-chat-dots-fill" style="font-size: 1.5em; color:blue;"></i>
+		      			</a>
 		      		</td>
 		        </tr>
 		    </tbody>

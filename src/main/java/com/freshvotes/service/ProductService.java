@@ -21,5 +21,9 @@ public class ProductService {
 	public List<Product> findByPublished(Boolean bool){
 		return productRepository.findByPublished(bool);
 	}
+	
+	public void deleteById(Long id) {
+		productRepository.deleteById(id);
+	}
 
 }
