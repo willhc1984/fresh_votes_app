@@ -28,12 +28,12 @@
 	      	<div class="mb-3">
 			  <label for="exampleFormControlInput1" class="form-label">Title</label>
 			  <input type="text" class="form-control" th:field="${feature.title}" 
-			  		placeholder="Feature title" />
+			  		placeholder="Feature title" required />
 			</div>
 			<div class="mb-3">
 			  <label for="exampleFormControlInput1" class="form-label">Description</label>
 			  <textarea type="text" class="form-control" th:field="${feature.description}" 
-			  		placeholder="Feature description"></textarea>
+			  		placeholder="Feature description" required></textarea>
 			</div>
 			<div>
 				<button class="btn btn-primary" type="submit">Save</button>

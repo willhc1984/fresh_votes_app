@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.freshvotes.model.Feature;
 import com.freshvotes.model.Product;
@@ -43,20 +44,20 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping(value = "/product")
+	@GetMapping(value = "/products")
 	public String createProduct(ModelMap model) {
 		model.put("product", new Product());
 		return "addProduct";
 	}
 	
 	@PostMapping(value = "/products")
-	private String createProduct(@Valid Product product, Model model,
-			@AuthenticationPrincipal User user, BindingResult result) {
-		
-		System.out.println(result);
+	private String createProduct(@Valid @ModelAttribute Product product, BindingResult result,
+			RedirectAttributes attr, Model model,
+			@AuthenticationPrincipal User user) {
 		
 		if(result.hasErrors()) {
-			return "redirect:/product";
+			attr.addFlashAttribute("fail", "Name is mandatory.");
+			return "redirect:/products";
 		}
 		
 		product.setPublished(false);
@@ -115,7 +116,6 @@ public class ProductController {
 	public String deleteProductById(@PathVariable Long id) {
 		productService.deleteById(id);
 		return "dashboard";
-		
 	}
 
 }

@@ -9,3 +9,9 @@ INSERT INTO `tb_features` VALUES (1,'Permitir que o usuário saiba quem visitou 
 INSERT INTO `tb_votes` VALUES (_binary '',1,1),(_binary '',1,4),(_binary '',1,5),(_binary '',1,6),(_binary '',2,1),(_binary '',2,2),(_binary '\0',2,3),(_binary '',2,4),(_binary '',2,6),(_binary '\0',3,2),(_binary '\0',3,3),(_binary '',3,4),(_binary '\0',3,5),(_binary '',3,6),(_binary '',4,1),(_binary '\0',4,2),(_binary '\0',4,3),(_binary '',4,4),(_binary '',5,2),(_binary '\0',5,5),(_binary '',5,6),(_binary '\0',6,1),(_binary '\0',6,2),(_binary '',6,5),(_binary '\0',6,6),(_binary '\0',14,1),(_binary '',14,3),(_binary '',21,6),(_binary '\0',24,6),(_binary '',26,1),(_binary '\0',27,3),(_binary '\0',27,6),(_binary '',30,5),(_binary '\0',32,1),(_binary '',32,2),(_binary '',32,3),(_binary '\0',32,5),(_binary '',33,3),(_binary '\0',33,4),(_binary '',33,6),(_binary '',34,2),(_binary '\0',35,2),(_binary '',36,1),(_binary '\0',36,2),(_binary '',36,3),(_binary '',37,2),(_binary '\0',37,4),(_binary '\0',37,5),(_binary '\0',37,6);
 
 INSERT INTO `tb_comments` VALUES (1,'Otimo!!!','2023-02-13 10:05:38',NULL,1,1),(2,'mais ou menos...','2023-02-13 10:05:57',1,1,1),(3,'AdoreS2!!!','2023-02-13 10:06:26',NULL,1,1),(4,'meia boca...','2023-02-13 10:06:38',3,1,1);
+INSERT INTO `tb_comments` VALUES (5,'Otimo!!!','2023-02-13 10:05:38',NULL,2,2);
+INSERT INTO `tb_comments` VALUES (6,'Otimo!!!','2023-02-13 10:05:38',NULL,3,3);
+INSERT INTO `tb_comments` VALUES (7,'Otimo!!!','2023-02-13 10:05:38',NULL,4,4);
+INSERT INTO `tb_comments` VALUES (8,'Otimo!!!','2023-02-13 10:05:38',NULL,5,5);
+INSERT INTO `tb_comments` VALUES (9,'Otimo!!!','2023-02-13 10:05:38',NULL,6,6);
+INSERT INTO `tb_comments` VALUES (10,'Otimo!!!','2023-02-13 10:05:38',NULL,2,1);

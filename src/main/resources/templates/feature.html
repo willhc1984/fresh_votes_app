@@ -48,13 +48,13 @@
 			  <label for="exampleFormControlInput1" class="form-label">Title</label>
 			  <input type="text" class="form-control" th:field="${feature.title}"
 			  		th:attrappend="disabled=${user.id == feature.user.id ? null : 'disabled'}" 
-			  		id="exampleFormControlInput1" placeholder="Feature title" />
+			  		id="exampleFormControlInput1" placeholder="Feature title" required />
 			</div>
 			<div class="mb-3">
 			  <label for="exampleFormControlInput1" class="form-label">Description</label>
 			  <textarea type="text" class="form-control" th:field="${feature.description}" 
 			  		th:attrappend="disabled=${user.id == feature.user.id ? null : 'disabled'}"
-			  		id="exampleFormControlInput1" placeholder="Feature description"></textarea>
+			  		id="exampleFormControlInput1" placeholder="Feature description" required></textarea>
 			</div>
 			<div th:if="${user.id == feature.user.id}">
 				<button class="btn btn-primary" type="submit">Save</button>
@@ -68,7 +68,7 @@
 	      		
 	          <div class="form-group" style="margin-top: 1.5em">
 	            <label for="text">Leave a comment below</label>
-	            <textarea class="form-control" th:field="${comment.text}" rows="3"></textarea>
+	            <textarea class="form-control" th:field="${comment.text}" rows="3" required></textarea>
 	          </div>
 	          <div>
 	          	<button class="btn btn-primary" type="submit" style="margin-top: 1em;">Add comment</button>
