@@ -40,10 +40,13 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.headers().frameOptions().disable();
 		http
-			.exceptionHandling().accessDeniedPage("/accessDenied").and()
+			.exceptionHandling().accessDeniedPage("/accessDenied").
+			and()			
 	        .authorizeRequests()
+	        	.antMatchers("/h2-console/**").permitAll()
 	        	.antMatchers("/**/*.*").permitAll()
-	        	.antMatchers("/register").permitAll()
+	        	.antMatchers(HttpMethod.POST, "/register").permitAll()
+	        	.antMatchers(HttpMethod.GET, "/register").permitAll()
 	        	.antMatchers("/").permitAll()
 	        	.antMatchers("/votes").authenticated()
 	        	.antMatchers("/votes/**").hasAnyRole("USER","OWNER")
@@ -56,7 +59,8 @@ public class SystemSecurity extends WebSecurityConfigurerAdapter{
 	        	.and()
 	        .logout()
 	        	.logoutUrl("/logout")
-	        	.permitAll();
+	        	.permitAll()
+			.and().csrf().ignoringAntMatchers("/h2-console/**");
 	}
 	
 }
